@@ -42,25 +42,31 @@ body{
     display:none;
     background-color: white;
     height:auto;
-    width:32rem;
+    width:34rem;
     text-align: center;
+    padding: 1rem;
 }
 .quiz>ol{
     list-style-position: inside;
 }
 .quiz>ol>li{
-    border: 2px solid antiquewhite;
+    border: 1px solid rgb(24, 23, 23);
     text-align: left;
     padding: 2px;
     font-size: x-large;
     height:auto;
-    margin: 2px;
+    margin: 0.5rem;
 }
 /* ol>li:hover{
     background-color:antiquewhite;
 } */
 .quiz>h1{
     height:auto;
+}
+
+.question,.indexNo{
+    margin: 1rem 0 1rem 0;
+    font-size: x-large;
 }
 #next{
     float: right;
@@ -72,7 +78,7 @@ body{
 }
 .para{
     float: left;
-    font-size: 45px;
+    font-size: 2.5rem;
 }
 #questionNo{
     display:none;
@@ -89,7 +95,8 @@ body{
 .timer{
     display: flex;
     flex-direction: row;
-    border:2px solid green;
+    margin:0 0 1rem 1rem;
+    /* border:2px solid green; */
 }
 #bob{
     margin-top: 4rem;

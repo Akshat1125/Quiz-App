@@ -10,6 +10,8 @@
 
 <body>
     <div class="container">
+
+        <!-- rules panel -->
         <div class="startbox" id="startbox">
             <h1>QUIZ RULE:</h1>
             <ul>
@@ -21,13 +23,20 @@
             <button id="start" style="float:left" onclick="quizPage()">Start</buttonid>
                 <button id="exit" style="float:right" onclick="exit()">exit</button>
             </div>
+
+            <!-- start alert await  -->
+            <div>
             <h1 class="bob">Wait for Alert Message</h1>
         <button id="bob" onclick="change()">start</button>
+    </div>
+
+    <!-- quiz box -->
         <div class="quiz" id="1">
             <div class="timer">
                 <h1 style=" flex:1;">Quiz app</h1>
                 <h1 style="float:right; flex:1;" class="time">00:00</h1>
             </div>
+            <hr/>
             <h1 class="indexNo" style="float: left;"></h1>
             <h1 class="question"></h1>
             <ol class="option">
@@ -107,6 +116,9 @@
         option4.innerHTML = option[0][3];
         questionNo.innerHTML = `Question No.${index + 1}`
         });
+
+
+        //next function
         function next() {
             if (index === 4) {
                 quiz.style.display = "none";
@@ -114,6 +126,7 @@
                 rst.innerHTML = `Your Score is ${count}`;
             }
             else {
+                removeqesoption.remover();
                 index++;
                 restart();
                 timerstrt();
@@ -133,18 +146,23 @@
                     eventlisten();
                 }
             }
+
+            // start button
             const change = () => {
                 startbox.style.display = "block";
                 head.style.display="none"
                 strBtn.style.display = "none";
             }
+
+
+// to get the targetted event or value from user
             const evt={ hello:function(event) {
                     // if(sec==30){
                     //     options.removeEventListener('click',hello);
                     // }
                     hover.removehover();
                     const target = event.target;
-                    console.log(target.value)
+                    // console.log(target.value)
                     if (target.value == answers[index]) {
                         pause();
                         target.style.backgroundColor = "#85f40f";
@@ -172,6 +190,9 @@
                 options.addEventListener('click', evt.hello);
 
             }
+
+
+            //function object for hovering or remove hover
             const hover ={
                 pop:function(event){
                     let tap=event.target;
@@ -179,6 +200,7 @@
                 },
                 push:function(event){
                     let tap=event.target;
+                    if(tap.value>0)
                     tap.style.backgroundColor="antiquewhite";
                 },
                 hover1:function(){
@@ -190,6 +212,8 @@
                     options.removeEventListener('mouseout',hover.pop);
                 }
             }
+
+            // side to button
             const quizPage=()=>{
                 startbox.style.display="none";
                 quiz.style.display="block";
@@ -199,22 +223,35 @@
                 startbox.style.display="none";
                 strBtn.style.display="block";
             }
+
+//object of remove question
+
+ const removeqesoption = {
+    poke:function(){alert("time over u r late");},
+    listener:function(){
+        options.addEventListener('click',removeqesoption.poke)
+    },
+    remover:function(){
+        options.removeEventListener('click',removeqesoption.poke);
+    }
+ }
+
+            //timer settings
             const watch=()=>{
                 if(sec==0){
                     timer.innerText="00:00";
-                    clearInterval(time);
                     hover.removehover();
+                    clearInterval(time);
                     evt.removeU();
+
                     nextBox.style.display = 'block';
                     for (i = 0; i < options.childNodes.length; i++)
                             if (options.childNodes[i].value === answers[index]) {
                                 options.childNodes[i].style.backgroundColor = "#85f40f";
                             }
-                    options.addEventListener('click',function poke(){
-                        alert("time over u r late");
-                        options.removeEventListener('click',poke);
-                    })
-                    sec=30;
+                  removeqesoption.listener();
+                //   removeqesoption.remover();
+
                 }else{
                 sec--;
                 let s=sec<10?"0"+sec:sec;
@@ -227,30 +264,16 @@
                 }
                 time=setInterval(watch,1000);
             }
+
             const pause=()=>{
         clearInterval(time);
     }
+
     const restart=()=>{
         clearInterval(time);
         sec=30;
         timer.innerText="00:30";
     }
-            // const hover =()=>{
-            //     const pop=(event)=>{
-            //         let tap=event.target
-            //                 tap.style.backgroundColor = "antiquewhite";
-            //     }
-            //     const push=(event)=>{
-            //         let tap=event.target
-            //                 tap.style.backgroundColor = "white";
-            //     }
-            //     options.addEventListener('mouseover',pop);
-            //     options.addEventListener('mouseout',push);
-            //     const hoverRemove =()=>{
-            //     options.removeEventListener('mouseover',pop);
-            //     options.removeEventListener('mouseout',push);
-            // }
-            // }
             hover.hover1();
             timerstrt();
             eventlisten();
